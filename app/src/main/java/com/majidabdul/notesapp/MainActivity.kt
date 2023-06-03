@@ -26,6 +26,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.majidabdul.notesapp.ui.theme.NotesAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,12 +43,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val navController = rememberNavController()
                     Scaffold(
                         content = { padding ->
-                            MainScreen(viewModel = MainViewModel(), padding)
+                            NavHost(navController = navController, startDestination = "list") {
+                                composable("list") {
+                                    MainScreen(viewModel = MainViewModel(), padding)
+                                }
+                                composable("addnote") {
+                                    AddNoteScreen()
+                                }
+                            }
                         },
                         floatingActionButton = {
-                            AddNoteFloatingButton(addNoteClicked = { println("TODO: Navigate to create note screen") })
+                            AddNoteFloatingButton(addNoteClicked = { navController.navigate("addnote") })
                         }
                     )
                 }
@@ -84,6 +95,12 @@ fun NoteCard(title: String) {
             style = MaterialTheme.typography.headlineMedium,
         )
     }
+}
+
+
+@Composable
+fun AddNoteScreen() {
+    Text(text = "TODO Create note screen")
 }
 
 @Composable
