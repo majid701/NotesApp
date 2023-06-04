@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                             NotesScreen(viewModel = NotesViewModel(), openEditNote = { navController.navigate("addnote")})
                         }
                         composable("addnote") {
-                            AddNoteScreen(viewModel = viewModel())
+                            AddNoteScreen(viewModel = viewModel(), popUp = { navController.navigateUp() })
                         }
                     }
                 }
