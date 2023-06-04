@@ -1,4 +1,4 @@
-package com.majidabdul.notesapp
+package com.majidabdul.notesapp.domain.repository
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.snapshots
