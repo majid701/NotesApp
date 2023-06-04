@@ -2,6 +2,7 @@ package com.majidabdul.notesapp.domain.repository
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.snapshots
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.majidabdul.notesapp.domain.model.Note
 import com.majidabdul.notesapp.domain.repository.NotesRepository
@@ -19,6 +20,10 @@ class NotesRepositoryImpl(
 
     override suspend fun add(note: Note): String {
         return notesRef.add(note).await().id
+    }
+
+    override suspend fun get(noteId: String): Note? {
+        return notesRef.document(noteId).get().await().toObject()
     }
 
     override suspend fun update(note: Note) {

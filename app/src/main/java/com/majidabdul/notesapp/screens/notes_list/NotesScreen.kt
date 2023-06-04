@@ -1,5 +1,6 @@
 package com.majidabdul.notesapp.screens.notes_list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majidabdul.notesapp.composable.AddNoteFloatingButton
+import com.majidabdul.notesapp.domain.model.Note
 import com.majidabdul.notesapp.ui.theme.NotesAppTheme
 
 
@@ -25,7 +27,7 @@ import com.majidabdul.notesapp.ui.theme.NotesAppTheme
 @Composable
 fun NotesScreen(
     viewModel: NotesViewModel,
-    openEditNote: (String?) -> Unit
+    openEditNote: (Note?) -> Unit
 ) {
     val notes by viewModel.getNotes().collectAsState(initial = emptyList())
 
@@ -36,7 +38,7 @@ fun NotesScreen(
     ) {
         LazyColumn(modifier = Modifier.padding(it)) {
             items(notes) { note ->
-                NoteCard(title = note.title)
+                NoteCard(title = note.title, onClick = { openEditNote(note) })
             }
         }
     }
@@ -44,12 +46,13 @@ fun NotesScreen(
 
 
 @Composable
-fun NoteCard(title: String) {
+fun NoteCard(title: String, onClick: () -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(),
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onClick() },
     ) {
         Text(
             text = title,
@@ -65,7 +68,7 @@ fun NoteCard(title: String) {
 @Composable
 fun NoteCardPreview() {
     NotesAppTheme {
-        NoteCard(title = "This is a long note title")
+        NoteCard(title = "This is a long note title", onClick = {})
     }
 }
 

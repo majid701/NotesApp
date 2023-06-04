@@ -40,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.majidabdul.notesapp.extensions.fieldModifier
 import com.majidabdul.notesapp.screens.edit_note.AddNoteScreen
 import com.majidabdul.notesapp.screens.notes_list.NotesScreen
@@ -59,12 +60,25 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "list") {
-                        composable("list") {
-                            NotesScreen(viewModel = NotesViewModel(), openEditNote = { navController.navigate("addnote")})
+                    NavHost(navController = navController, startDestination = "notes_list") {
+                        composable("notes_list") {
+                            NotesScreen(
+                                viewModel = NotesViewModel(),
+                                openEditNote = {
+                                    navController.navigate("edit_note_screen?noteId=${it?.id}")
+                                }
+                            )
                         }
-                        composable("addnote") {
-                            AddNoteScreen(viewModel = viewModel(), popUp = { navController.navigateUp() })
+                        composable(
+                            "edit_note_screen?noteId={noteId}",
+                            arguments = listOf(navArgument("noteId") { defaultValue = "-1" })
+                        ) {
+                            val noteId = it.arguments?.getString("noteId")
+                            AddNoteScreen(
+                                noteId = noteId,
+                                viewModel = viewModel(),
+                                popUp = { navController.navigateUp() }
+                            )
                         }
                     }
                 }

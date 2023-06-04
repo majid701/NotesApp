@@ -3,6 +3,7 @@ package com.majidabdul.notesapp.screens.notes_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.majidabdul.notesapp.domain.model.Note
 import com.majidabdul.notesapp.domain.repository.NotesRepositoryImpl
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,7 @@ class NotesViewModel: ViewModel() {
     fun getNotes() = notesRepository.getNotes()
 
 
-    fun onAddClick(openEditNote: (String?) -> Unit) {
+    fun onAddClick(openEditNote: (Note?) -> Unit) {
         openEditNote(null)
     }
 }

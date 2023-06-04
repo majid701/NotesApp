@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,10 +24,13 @@ import com.majidabdul.notesapp.extensions.fieldModifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNoteScreen(
+    noteId: String?,
     viewModel: EditNoteViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     popUp: () -> Unit
 ) {
     val note = viewModel.note
+
+    LaunchedEffect(Unit) { viewModel.init(noteId) }
 
     Column(
         modifier = Modifier
@@ -56,5 +60,5 @@ fun AddNoteScreen(
 @Preview
 @Composable
 fun AddNoteScreenPreview() {
-    AddNoteScreen(popUp = {})
+    AddNoteScreen(popUp = {}, noteId = "-1")
 }

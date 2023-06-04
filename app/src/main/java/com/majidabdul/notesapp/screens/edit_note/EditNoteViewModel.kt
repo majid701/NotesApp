@@ -15,6 +15,14 @@ class EditNoteViewModel(application: Application): AndroidViewModel(application)
 
     val note = mutableStateOf(Note())
 
+    fun init(noteId: String?) {
+        viewModelScope.launch {
+            noteId?.let {
+                note.value = notesRepository.get(it) ?: Note()
+            }
+        }
+    }
+
     fun onSaveClicked(popUp: () -> Unit) {
         viewModelScope.launch {
             val note = note.value
