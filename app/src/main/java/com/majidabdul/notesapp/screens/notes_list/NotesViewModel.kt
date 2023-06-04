@@ -17,4 +17,10 @@ class NotesViewModel: ViewModel() {
     fun onAddClick(openEditNote: (Note?) -> Unit) {
         openEditNote(null)
     }
+
+    fun onDeleteClick(note: Note) {
+        viewModelScope.launch {
+            notesRepository.delete(note.id)
+        }
+    }
 }

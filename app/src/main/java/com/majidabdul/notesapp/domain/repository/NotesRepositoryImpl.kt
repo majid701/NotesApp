@@ -31,7 +31,7 @@ class NotesRepositoryImpl(
     }
 
     override suspend fun delete(noteId: String) {
-        TODO("Not yet implemented")
+        notesRef.document(noteId).delete().await()
     }
 
 }

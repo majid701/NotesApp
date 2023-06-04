@@ -10,7 +10,7 @@ the focus area will be clean architecture following Modern App Architecture.
 - [x] Show a list of notes fetched from the database
 - [x] Show note details
 - [x] Edit existing note
-- [ ] Delete note
+- [x] Delete note
 - [ ] Search in notes
 - [ ] Empty state and loading state
 - [ ] Mark notes as favourite
