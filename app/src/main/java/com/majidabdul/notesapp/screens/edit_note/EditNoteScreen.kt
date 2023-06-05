@@ -12,10 +12,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.majidabdul.notesapp.R
 import com.majidabdul.notesapp.composable.BasicField
 import com.majidabdul.notesapp.composable.BasicFieldMulti
 import com.majidabdul.notesapp.extensions.fieldModifier
@@ -28,7 +31,7 @@ fun AddNoteScreen(
     viewModel: EditNoteViewModel,
     popUp: () -> Unit
 ) {
-    val note = viewModel.note
+    val note by viewModel.note
 
     LaunchedEffect(Unit) { viewModel.init(noteId) }
 
@@ -44,15 +47,15 @@ fun AddNoteScreen(
             text = "Note", style = MaterialTheme.typography.titleLarge
         )
         BasicField(
-            text = "Title", value = note.value.title,
+            text = stringResource(R.string.title), value = note.title,
             viewModel::onTitleChange, Modifier.fieldModifier()
         )
         BasicFieldMulti(
-            text = "What's on your mind today", value = note.value.body,
+            text = stringResource(R.string.body_hint), value = note.body,
             viewModel::onBodyChange, Modifier.fieldModifier()
         )
         Button(onClick = { viewModel.onSaveClicked(popUp) }, modifier = Modifier.fillMaxWidth(1f)) {
-            Text(text = "SAVE")
+            Text(text = stringResource(R.string.save_button))
         }
     }
 }

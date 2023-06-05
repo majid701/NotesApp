@@ -11,6 +11,11 @@ import com.majidabdul.notesapp.domain.repository.NotesRepository
 import com.majidabdul.notesapp.domain.repository.NotesRepositoryImpl
 import kotlinx.coroutines.launch
 
+/**
+ * Errors and Exception are left out
+ * Ideally if things go wrong while running these couroutines for example saving to the database fails
+ * the user has to be notified about it. We could do that by attaching a snakcbar to the view for example
+ */
 class EditNoteViewModel(val notesRepository: NotesRepository): ViewModel() {
     val note = mutableStateOf(Note())
 

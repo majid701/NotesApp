@@ -16,13 +16,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.majidabdul.notesapp.R
 import com.majidabdul.notesapp.composable.AddNoteFloatingButton
 import com.majidabdul.notesapp.domain.model.Note
 import com.majidabdul.notesapp.ui.theme.NotesAppTheme
@@ -37,10 +41,24 @@ fun NotesScreen(
     val notes by viewModel.getNotes().collectAsState(initial = emptyList())
 
     Scaffold(
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = stringResource(R.string.list_title),
+                    style = MaterialTheme.typography.headlineLarge,
+                    textAlign = TextAlign.Center
+                )
+            })
+        },
         floatingActionButton = {
             AddNoteFloatingButton(addNoteClicked = { viewModel.onAddClick(openEditNote) })
         }
     ) {
+        /*
+         * A searchbar can be added on top here to allow users to search
+         * Firestore has limited capabilities on free text search so this can be done client side
+         * after fetching the data or in a limited through the database
+         */
         LazyColumn(modifier = Modifier.padding(it)) {
             items(notes) { note ->
                 NoteCard(
@@ -76,7 +94,7 @@ fun NoteCard(title: String, onClick: () -> Unit, onDeleteClick: () -> Unit) {
         ) {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = "Delete note",
+                contentDescription = stringResource(R.string.delete_note_content_description),
                 tint = MaterialTheme.colorScheme.onSurface
             )
         }
@@ -88,7 +106,7 @@ fun NoteCard(title: String, onClick: () -> Unit, onDeleteClick: () -> Unit) {
 fun NoteCardPreview() {
     NotesAppTheme {
         NoteCard(
-            title = "This is a long note title jashdjshdghasdg",
+            title = "This is a long note title",
             onClick = {},
             onDeleteClick = {}
         )

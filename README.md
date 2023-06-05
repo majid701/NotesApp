@@ -11,13 +11,18 @@ the focus area will be clean architecture following Modern App Architecture.
 - [x] Show note details
 - [x] Edit existing note
 - [x] Delete note
-- [ ] Search in notes
+- [ ] Search
+- [ ] Add note as favourite
+- [ ] Sort notes by created date, title
 - [ ] Empty state and loading state
-- [ ] Mark notes as favourite
 - [ ] Offline availability
 
-### Notes
+### Refactors & Notes
 
 - [ ] Refactor all harcoded strings
 - [ ] Use dependency injection with Hilt
 - [x] Start adding some tests
+
+| List | Details | Add New |
+| --- | --- | --- |
+|![](screenshots/notes_list_screen.png)|![](screenshots/edit_note_screen.png)|![](screenshots/add_note_screen.png)|

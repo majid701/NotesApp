@@ -10,6 +10,13 @@ import kotlinx.coroutines.launch
 
 class NotesViewModel(val notesRepository: NotesRepository): ViewModel() {
 
+    /*
+     * Some sort of screen UI state logic should be implemented here as well so we can show the user
+     * Loading -> View results
+     * Loading -> Error
+     * Loading -> Empty View
+     */
+
     fun getNotes() = notesRepository.getNotes()
 
 

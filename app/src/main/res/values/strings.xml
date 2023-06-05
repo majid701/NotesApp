@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NotesApp</string>
+    <string name="title">Title</string>
+    <string name="body_hint">What\'s on your mind today</string>
+    <string name="save_button">SAVE</string>
+    <string name="delete_note_content_description">Delete note</string>
+    <string name="list_title">Notes</string>
 </resources>
