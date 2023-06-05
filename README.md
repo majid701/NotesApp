@@ -6,6 +6,12 @@ Jetpack compose, ViewModels, Kotlin Coroutines, Asynchronous Flow.
 The scope for the UI will be reduced wherever possible to save time and
 the focus area will be clean architecture following Modern App Architecture.
 
+## How to run
+1. Create a firebase project and register an android app inside it. 
+2. Download google-services.json file and copy over under the app/ folder
+3. Create a firestore database instance in Test mode (not recommended for production) and make sure 
+security rules allow read / writes to `/notes` collection
+
 ## Functionality
 - [x] Show a list of notes fetched from the database
 - [x] Show note details
