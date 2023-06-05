@@ -20,4 +20,4 @@ the focus area will be clean architecture following Modern App Architecture.
 
 - [ ] Refactor all harcoded strings
 - [ ] Use dependency injection with Hilt
-- [ ] Add tests
+- [x] Start adding some tests

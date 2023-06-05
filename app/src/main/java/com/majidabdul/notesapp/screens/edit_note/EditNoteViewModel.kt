@@ -3,16 +3,15 @@ package com.majidabdul.notesapp.screens.edit_note
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.majidabdul.notesapp.domain.model.Note
+import com.majidabdul.notesapp.domain.repository.NotesRepository
 import com.majidabdul.notesapp.domain.repository.NotesRepositoryImpl
 import kotlinx.coroutines.launch
 
-class EditNoteViewModel(application: Application): AndroidViewModel(application) {
-    private val notesCollection = FirebaseFirestore.getInstance().collection("notes")
-    private val notesRepository = NotesRepositoryImpl(notesCollection)
-
+class EditNoteViewModel(val notesRepository: NotesRepository): ViewModel() {
     val note = mutableStateOf(Note())
 
     fun init(noteId: String?) {

@@ -25,7 +25,7 @@ import com.majidabdul.notesapp.extensions.fieldModifier
 @Composable
 fun AddNoteScreen(
     noteId: String?,
-    viewModel: EditNoteViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    viewModel: EditNoteViewModel,
     popUp: () -> Unit
 ) {
     val note = viewModel.note
@@ -60,5 +60,5 @@ fun AddNoteScreen(
 @Preview
 @Composable
 fun AddNoteScreenPreview() {
-    AddNoteScreen(popUp = {}, noteId = "-1")
+    // AddNoteScreen(popUp = {}, noteId = "-1")
 }

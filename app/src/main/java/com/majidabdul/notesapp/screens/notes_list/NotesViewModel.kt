@@ -4,12 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.majidabdul.notesapp.domain.model.Note
+import com.majidabdul.notesapp.domain.repository.NotesRepository
 import com.majidabdul.notesapp.domain.repository.NotesRepositoryImpl
 import kotlinx.coroutines.launch
 
-class NotesViewModel: ViewModel() {
-    private val notesCollection = FirebaseFirestore.getInstance().collection("notes")
-    private val notesRepository = NotesRepositoryImpl(notesCollection)
+class NotesViewModel(val notesRepository: NotesRepository): ViewModel() {
 
     fun getNotes() = notesRepository.getNotes()
 

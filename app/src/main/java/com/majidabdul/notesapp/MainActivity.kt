@@ -41,8 +41,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.firebase.firestore.FirebaseFirestore
+import com.majidabdul.notesapp.domain.repository.NotesRepositoryImpl
 import com.majidabdul.notesapp.extensions.fieldModifier
 import com.majidabdul.notesapp.screens.edit_note.AddNoteScreen
+import com.majidabdul.notesapp.screens.edit_note.EditNoteViewModel
 import com.majidabdul.notesapp.screens.notes_list.NotesScreen
 import com.majidabdul.notesapp.screens.notes_list.NotesViewModel
 import com.majidabdul.notesapp.ui.theme.NotesAppTheme
@@ -51,6 +54,9 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val notesCollection = FirebaseFirestore.getInstance().collection("notes")
+        val notesRepository = NotesRepositoryImpl(notesCollection)
 
         setContent {
             NotesAppTheme {
@@ -63,7 +69,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = "notes_list") {
                         composable("notes_list") {
                             NotesScreen(
-                                viewModel = NotesViewModel(),
+                                viewModel = NotesViewModel(notesRepository),
                                 openEditNote = {
                                     navController.navigate("edit_note_screen?noteId=${it?.id}")
                                 }
@@ -76,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             val noteId = it.arguments?.getString("noteId")
                             AddNoteScreen(
                                 noteId = noteId,
-                                viewModel = viewModel(),
+                                viewModel = EditNoteViewModel(notesRepository),
                                 popUp = { navController.navigateUp() }
                             )
                         }
